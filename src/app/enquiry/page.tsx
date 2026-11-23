@@ -21,12 +21,12 @@ import {
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/shared/toast-context";
+import { ToastProvider, useToast } from "@/components/shared/toast-context";
 import { formatCurrency } from "@/lib/utils";
 import { getStore, addLeadActivity, addAuditLogEntry } from "@/lib/data/store";
 import { Lead } from "@/lib/types/database";
 
-export default function PublicEnquiryPage() {
+function PublicEnquiryForm() {
   const { toast } = useToast();
   const [submitted, setSubmitted] = React.useState(false);
   const [leadCode, setLeadCode] = React.useState("");
@@ -542,5 +542,13 @@ export default function PublicEnquiryPage() {
         </p>
       </footer>
     </div>
+  );
+}
+
+export default function PublicEnquiryPage() {
+  return (
+    <ToastProvider>
+      <PublicEnquiryForm />
+    </ToastProvider>
   );
 }
